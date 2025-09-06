@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mind Maps - EduPlay</title>
+    <title>Mind Maps - SkillSphere</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -652,6 +652,82 @@
         .pulse {
             animation: pulse 0.5s ease;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .close-modal {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: var(--secondary);
+        }
     </style>
 </head>
 <body>
@@ -665,8 +741,8 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>EduPlay</span>
+                    <img src="logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">
+                    <span>SkillSphere</span>
                 </div>
             </div>
             <div class="sidebar-menu">
@@ -760,133 +836,10 @@
                 </div>
                 
                 <h2 class="section-title"><i class="fas fa-star"></i> Featured Mind Maps</h2>
-                <div class="mindmaps-grid">
-                    <div class="mindmap-card">
-                        <div class="mindmap-preview math-bg">
-                            <div class="mindmap-icon">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <div class="mindmap-badge">Mathematics</div>
-                        </div>
-                        <div class="mindmap-body">
-                            <h3>Algebra Concepts</h3>
-                            <p>Visual guide to algebraic expressions, equations, and functions with interconnected concepts.</p>
-                            <div class="mindmap-stats">
-                                <span><i class="fas fa-node-js"></i> 24 Nodes</span>
-                                <span><i class="fas fa-link"></i> 18 Connections</span>
-                            </div>
-                        </div>
-                        <div class="mindmap-footer">
-                            <span>Grade 9-10</span>
-                            <button class="btn btn-primary view-mindmap" data-mindmap="algebra">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="mindmap-card">
-                        <div class="mindmap-preview science-bg">
-                            <div class="mindmap-icon">
-                                <i class="fas fa-atom"></i>
-                            </div>
-                            <div class="mindmap-badge">Science</div>
-                        </div>
-                        <div class="mindmap-body">
-                            <h3>Cell Biology</h3>
-                            <p>Comprehensive overview of cell structure, organelles, and cellular processes.</p>
-                            <div class="mindmap-stats">
-                                <span><i class="fas fa-node-js"></i> 32 Nodes</span>
-                                <span><i class="fas fa-link"></i> 28 Connections</span>
-                            </div>
-                        </div>
-                        <div class="mindmap-footer">
-                            <span>Grade 8-9</span>
-                            <button class="btn btn-primary view-mindmap" data-mindmap="biology">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="mindmap-card">
-                        <div class="mindmap-preview english-bg">
-                            <div class="mindmap-icon">
-                                <i class="fas fa-language"></i>
-                            </div>
-                            <div class="mindmap-badge">English</div>
-                        </div>
-                        <div class="mindmap-body">
-                            <h3>Grammar Rules</h3>
-                            <p>Visual representation of English grammar rules, tenses, and sentence structures.</p>
-                            <div class="mindmap-stats">
-                                <span><i class="fas fa-node-js"></i> 28 Nodes</span>
-                                <span><i class="fas fa-link"></i> 22 Connections</span>
-                            </div>
-                        </div>
-                        <div class="mindmap-footer">
-                            <span>All Grades</span>
-                            <button class="btn btn-primary view-mindmap" data-mindmap="grammar">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="mindmap-card">
-                        <div class="mindmap-preview history-bg">
-                            <div class="mindmap-icon">
-                                <i class="fas fa-monument"></i>
-                            </div>
-                            <div class="mindmap-badge">History</div>
-                        </div>
-                        <div class="mindmap-body">
-                            <h3>World War II</h3>
-                            <p>Timeline and connections between key events, figures, and outcomes of WWII.</p>
-                            <div class="mindmap-stats">
-                                <span><i class="fas fa-node-js"></i> 36 Nodes</span>
-                                <span><i class="fas fa-link"></i> 42 Connections</span>
-                            </div>
-                        </div>
-                        <div class="mindmap-footer">
-                            <span>Grade 10-12</span>
-                            <button class="btn btn-primary view-mindmap" data-mindmap="wwii">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="mindmap-card">
-                        <div class="mindmap-preview geography-bg">
-                            <div class="mindmap-icon">
-                                <i class="fas fa-globe-asia"></i>
-                            </div>
-                            <div class="mindmap-badge">Geography</div>
-                        </div>
-                        <div class="mindmap-body">
-                            <h3>Earth's Ecosystems</h3>
-                            <p>Interconnected systems of biomes, climate zones, and environmental factors.</p>
-                            <div class="mindmap-stats">
-                                <span><i class="fas fa-node-js"></i> 26 Nodes</span>
-                                <span><i class="fas fa-link"></i> 30 Connections</span>
-                            </div>
-                        </div>
-                        <div class="mindmap-footer">
-                            <span>Grade 8-10</span>
-                            <button class="btn btn-primary view-mindmap" data-mindmap="ecosystems">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="mindmap-card">
-                        <div class="mindmap-preview math-bg">
-                            <div class="mindmap-icon">
-                                <i class="fas fa-shapes"></i>
-                            </div>
-                            <div class="mindmap-badge">Mathematics</div>
-                        </div>
-                        <div class="mindmap-body">
-                            <h3>Geometry Theorems</h3>
-                            <p>Visual connections between geometric principles, theorems, and formulas.</p>
-                            <div class="mindmap-stats">
-                                <span><i class="fas fa-node-js"></i> 30 Nodes</span>
-                                <span><i class="fas fa-link"></i> 35 Connections</span>
-                            </div>
-                        </div>
-                        <div class="mindmap-footer">
-                            <span>Grade 9-11</span>
-                            <button class="btn btn-primary view-mindmap" data-mindmap="geometry">Explore</button>
-                        </div>
-                    </div>
-                </div>
+                <div style="margin-bottom:20px;text-align:right;">
+  <button class="btn btn-primary" id="addMindmapBtn"><i class="fas fa-plus"></i> Add Mind Map</button>
+</div>
+<div class="mindmaps-grid" id="mindmapsGrid"></div>
                 
                 <!-- Algebra Mind Map Viewer -->
                 <div class="mindmap-viewer" id="algebra-mindmap">
@@ -1011,6 +964,78 @@
             </div>
         </div>
     </div>
+
+    <!-- Add/Edit Mind Map Modal -->
+<div class="modal" id="mindmapModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="mindmapModalTitle">Add New Mind Map</h3>
+      <button class="close-modal">&times;</button>
+    </div>
+    <form id="mindmapForm">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="mmTitle">Title</label>
+          <input type="text" id="mmTitle" required>
+        </div>
+        <div class="form-group">
+          <label for="mmSubject">Subject</label>
+          <select id="mmSubject" required>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+            <option value="History">History</option>
+            <option value="Geography">Geography</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mmDescription">Description</label>
+          <textarea id="mmDescription" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="mmCentral">Central Topic</label>
+          <input type="text" id="mmCentral" required>
+        </div>
+        <div class="form-group">
+          <label>Nodes (comma separated)</label>
+          <input type="text" id="mmNodes" placeholder="e.g. Expressions, Equations, Functions">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Delete Confirmation Modal -->
+<div class="modal" id="confirmMindmapModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Confirm Delete</h3>
+      <button class="close-modal">&times;</button>
+    </div>
+    <div class="modal-body" id="confirmMindmapMessage">Are you sure you want to delete this mind map?</div>
+    <div class="form-actions">
+      <button class="btn btn-danger" id="confirmMindmapYes">Yes</button>
+      <button type="button" class="btn btn-outline close-modal">No</button>
+    </div>
+  </div>
+</div>
+<!-- Mind Map Viewer Modal -->
+<div class="modal" id="mindmapViewerModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="viewerMindmapTitle">Mind Map</h3>
+      <button class="close-modal">&times;</button>
+    </div>
+    <div class="modal-body" id="viewerMindmapBody"></div>
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline close-modal">Close</button>
+    </div>
+  </div>
+</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

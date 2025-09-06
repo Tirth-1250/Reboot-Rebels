@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Models & Experiments - EduPlay</title>
+    <title>3D Models & Experiments - SkillSphere</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -699,6 +699,104 @@
         .electron1 { animation: orbit 4s linear infinite; }
         .electron2 { animation: orbit 6s linear infinite reverse; }
         .electron3 { animation: orbit 5s linear infinite; }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="url"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -712,8 +810,8 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>EduPlay</span>
+                    <img src="logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">
+                    <span>SkillSphere</span>
                 </div>
             </div>
             <div class="sidebar-menu">
@@ -807,145 +905,10 @@
                 </div>
                 
                 <h2 class="section-title"><i class="fas fa-star"></i> Featured Models</h2>
-                <div class="models-grid">
-                    <div class="model-card">
-                        <div class="model-preview physics-bg">
-                            <div class="model-placeholder">
-                                <div class="atom">
-                                    <div class="nucleus"></div>
-                                    <div class="orbit orbit1"></div>
-                                    <div class="orbit orbit2"></div>
-                                    <div class="orbit orbit3"></div>
-                                    <div class="electron electron1"></div>
-                                    <div class="electron electron2"></div>
-                                    <div class="electron electron3"></div>
-                                </div>
-                            </div>
-                            <div class="model-badge">Physics</div>
-                            <div class="interactive-badge">Interactive</div>
-                        </div>
-                        <div class="model-body">
-                            <h3>Atomic Structure</h3>
-                            <p>Explore the structure of an atom with protons, neutrons, and electrons in motion. Understand electron shells and atomic properties.</p>
-                            <div class="model-stats">
-                                <span><i class="fas fa-ruler-combined"></i> 3D Model</span>
-                                <span><i class="fas fa-clock"></i> 15 min</span>
-                            </div>
-                        </div>
-                        <div class="model-footer">
-                            <span>Grade 9-12</span>
-                            <button class="btn btn-primary view-model" data-model="atomic">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="model-card">
-                        <div class="model-preview chemistry-bg">
-                            <div class="model-placeholder">
-                                <i class="fas fa-atom"></i>
-                            </div>
-                            <div class="model-badge">Chemistry</div>
-                            <div class="interactive-badge">Interactive</div>
-                        </div>
-                        <div class="model-body">
-                            <h3>Molecular Bonds</h3>
-                            <p>Visualize how atoms bond to form molecules. Explore covalent, ionic, and hydrogen bonds with interactive examples.</p>
-                            <div class="model-stats">
-                                <span><i class="fas fa-ruler-combined"></i> 3D Model</span>
-                                <span><i class="fas fa-clock"></i> 20 min</span>
-                            </div>
-                        </div>
-                        <div class="model-footer">
-                            <span>Grade 10-12</span>
-                            <button class="btn btn-primary view-model" data-model="molecular">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="model-card">
-                        <div class="model-preview biology-bg">
-                            <div class="model-placeholder">
-                                <i class="fas fa-dna"></i>
-                            </div>
-                            <div class="model-badge">Biology</div>
-                            <div class="interactive-badge">Interactive</div>
-                        </div>
-                        <div class="model-body">
-                            <h3>DNA Structure</h3>
-                            <p>Discover the double helix structure of DNA. Learn about base pairing, nucleotides, and genetic coding.</p>
-                            <div class="model-stats">
-                                <span><i class="fas fa-ruler-combined"></i> 3D Model</span>
-                                <span><i class="fas fa-clock"></i> 25 min</span>
-                            </div>
-                        </div>
-                        <div class="model-footer">
-                            <span>Grade 9-11</span>
-                            <button class="btn btn-primary view-model" data-model="dna">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="model-card">
-                        <div class="model-preview math-bg">
-                            <div class="model-placeholder">
-                                <i class="fas fa-square"></i>
-                            </div>
-                            <div class="model-badge">Mathematics</div>
-                        </div>
-                        <div class="model-body">
-                            <h3>Geometric Shapes</h3>
-                            <p>Explore 3D geometric shapes, their properties, surface areas, and volumes. Rotate and examine from all angles.</p>
-                            <div class="model-stats">
-                                <span><i class="fas fa-ruler-combined"></i> 3D Model</span>
-                                <span><i class="fas fa-clock"></i> 15 min</span>
-                            </div>
-                        </div>
-                        <div class="model-footer">
-                            <span>Grade 8-10</span>
-                            <button class="btn btn-primary view-model" data-model="geometric">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="model-card">
-                        <div class="model-preview earth-bg">
-                            <div class="model-placeholder">
-                                <i class="fas fa-globe-americas"></i>
-                            </div>
-                            <div class="model-badge">Earth Science</div>
-                        </div>
-                        <div class="model-body">
-                            <h3>Volcanic Eruption</h3>
-                            <p>Understand volcanic formation and eruption processes. Explore different volcano types and their characteristics.</p>
-                            <div class="model-stats">
-                                <span><i class="fas fa-video"></i> Simulation</span>
-                                <span><i class="fas fa-clock"></i> 18 min</span>
-                            </div>
-                        </div>
-                        <div class="model-footer">
-                            <span>Grade 8-9</span>
-                            <button class="btn btn-primary view-model" data-model="volcano">Explore</button>
-                        </div>
-                    </div>
-                    
-                    <div class="model-card">
-                        <div class="model-preview physics-bg">
-                            <div class="model-placeholder">
-                                <i class="fas fa-solar-panel"></i>
-                            </div>
-                            <div class="model-badge">Physics</div>
-                            <div class="interactive-badge">Interactive</div>
-                        </div>
-                        <div class="model-body">
-                            <h3>Solar System</h3>
-                            <p>Explore our solar system with planets orbiting the sun. Learn about planetary properties, orbits, and scales.</p>
-                            <div class="model-stats">
-                                <span><i class="fas fa-ruler-combined"></i> 3D Model</span>
-                                <span><i class="fas fa-clock"></i> 30 min</span>
-                            </div>
-                        </div>
-                        <div class="model-footer">
-                            <span>Grade 8-10</span>
-                            <button class="btn btn-primary view-model" data-model="solar">Explore</button>
-                        </div>
-                    </div>
-                </div>
+                <div style="margin-bottom:20px;text-align:right;">
+  <button class="btn btn-primary" id="addModelBtn"><i class="fas fa-plus"></i> Add Model</button>
+</div>
+                <div class="models-grid" id="modelsGrid"></div>
                 
                 <!-- Atomic Model Viewer -->
                 <div class="model-viewer" id="atomic-viewer">
@@ -1038,6 +1001,73 @@
         </div>
     </div>
 
+    <!-- Add/Edit Model Modal -->
+    <div class="modal" id="modelModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modelModalTitle">Add New Model</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="modelForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="modelTitle">Title</label>
+              <input type="text" id="modelTitle" placeholder="Enter model title" required>
+            </div>
+            <div class="form-group">
+              <label for="modelDescription">Description</label>
+              <textarea id="modelDescription" placeholder="Enter model description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="modelCategory">Category</label>
+              <select id="modelCategory" required>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Earth Science">Earth Science</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="modelImage">Image/Icon URL</label>
+              <input type="text" id="modelImage" placeholder="Paste image or icon URL (FontAwesome supported)">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="modelFormSubmit">Save</button>
+            <button type="button" class="btn btn-outline close-modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="confirmModelModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Confirm Delete</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body" id="confirmModelMessage">Are you sure you want to delete this model?</div>
+        <div class="form-actions">
+          <button class="btn btn-danger" id="confirmModelYes">Yes</button>
+          <button type="button" class="btn btn-outline close-modal">No</button>
+        </div>
+      </div>
+    </div>
+    <!-- Model Viewer Modal -->
+    <div class="modal" id="modelViewerModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="viewerModelTitle">Model Details</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body" id="viewerModelBody"></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline close-modal">Close</button>
+        </div>
+      </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Check if user is logged in
@@ -1084,15 +1114,11 @@
             
             viewModelButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const model = this.getAttribute('data-model');
-                    
-                    // Show the model viewer
-                    modelViewer.classList.add('active');
-                    
-                    // Scroll to the viewer
-                    modelViewer.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const id = Number(this.getAttribute('data-id'));
+                    const model = getModels().find(m => m.id === id);
+                    if (model) {
+                        openModelViewer(model);
+                    }
                 });
             });
 
@@ -1131,6 +1157,236 @@
                     card.style.animationDelay = `${index * 0.1}s`;
                 });
             }, 500);
+
+            // Model management logic
+            const defaultModels = [
+                {
+                    id: 1,
+                    title: 'Atomic Structure',
+                    description: 'Explore the structure of an atom with protons, neutrons, and electrons in motion. Understand electron shells and atomic properties.',
+                    category: 'Physics',
+                    image: 'atom',
+                    icon: 'fas fa-atom',
+                    grades: '9-12',
+                    time: '15 min',
+                    interactive: true
+                },
+                {
+                    id: 2,
+                    title: 'Molecular Bonds',
+                    description: 'Visualize how atoms bond to form molecules. Explore covalent, ionic, and hydrogen bonds with interactive examples.',
+                    category: 'Chemistry',
+                    image: 'fas fa-atom',
+                    icon: 'fas fa-atom',
+                    grades: '10-12',
+                    time: '20 min',
+                    interactive: true
+                },
+                {
+                    id: 3,
+                    title: 'DNA Structure',
+                    description: 'Discover the double helix structure of DNA. Learn about base pairing, nucleotides, and genetic coding.',
+                    category: 'Biology',
+                    image: 'fas fa-dna',
+                    icon: 'fas fa-dna',
+                    grades: '9-11',
+                    time: '25 min',
+                    interactive: true
+                },
+                {
+                    id: 4,
+                    title: 'Geometric Shapes',
+                    description: 'Explore 3D geometric shapes, their properties, surface areas, and volumes. Rotate and examine from all angles.',
+                    category: 'Mathematics',
+                    image: 'fas fa-square',
+                    icon: 'fas fa-square',
+                    grades: '8-10',
+                    time: '15 min',
+                    interactive: false
+                },
+                {
+                    id: 5,
+                    title: 'Volcanic Eruption',
+                    description: 'Understand volcanic formation and eruption processes. Explore different volcano types and their characteristics.',
+                    category: 'Earth Science',
+                    image: 'fas fa-globe-americas',
+                    icon: 'fas fa-globe-americas',
+                    grades: '8-9',
+                    time: '18 min',
+                    interactive: false
+                },
+                {
+                    id: 6,
+                    title: 'Solar System',
+                    description: 'Explore our solar system with planets orbiting the sun. Learn about planetary properties, orbits, and scales.',
+                    category: 'Physics',
+                    image: 'fas fa-solar-panel',
+                    icon: 'fas fa-solar-panel',
+                    grades: '8-10',
+                    time: '30 min',
+                    interactive: true
+                }
+            ];
+            function getModels() {
+                return JSON.parse(localStorage.getItem('eduplay_models') || 'null') || defaultModels;
+            }
+            function setModels(models) {
+                localStorage.setItem('eduplay_models', JSON.stringify(models));
+            }
+            function renderModels(filterCat = 'All Models', search = '') {
+                const models = getModels();
+                const grid = document.getElementById('modelsGrid');
+                const q = search.trim().toLowerCase();
+                grid.innerHTML = models.filter(m =>
+                    (filterCat === 'All Models' || m.category === filterCat) &&
+                    (!q || m.title.toLowerCase().includes(q) || m.description.toLowerCase().includes(q))
+                ).map(m => `
+                    <div class="model-card">
+                        <div class="model-preview ${m.category.toLowerCase().replace(/ /g,'-')}-bg">
+                            <div class="model-placeholder">
+                                ${m.image && m.image.startsWith('http') ? `<img src="${m.image}" alt="${m.title}" style="max-width:100%;max-height:100%;">` : `<i class="${m.icon||'fas fa-cube'}"></i>`}
+                            </div>
+                            <div class="model-badge">${m.category}</div>
+                            ${m.interactive ? '<div class="interactive-badge">Interactive</div>' : ''}
+                        </div>
+                        <div class="model-body">
+                            <h3>${m.title}</h3>
+                            <p>${m.description}</p>
+                            <div class="model-stats">
+                                <span><i class="fas fa-ruler-combined"></i> 3D Model</span>
+                                <span><i class="fas fa-clock"></i> ${m.time||'15 min'}</span>
+                            </div>
+                        </div>
+                        <div class="model-footer">
+                            <span>Grade ${m.grades||'8-12'}</span>
+                            <div>
+                                <button class="btn btn-primary view-model" data-id="${m.id}"><i class="fas fa-eye"></i> Explore</button>
+                                <button class="btn btn-outline edit-model" data-id="${m.id}"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-outline delete-model" data-id="${m.id}"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('') || '<div style="padding:40px;text-align:center;color:#888;">No models found.</div>';
+            }
+            // Add Model
+            document.getElementById('addModelBtn').addEventListener('click', function() {
+                openModelModal(false);
+            });
+            // Open/close modals
+            function openModelModal(edit = false, model = null) {
+                document.getElementById('modelModal').classList.add('active');
+                document.getElementById('modelModalTitle').textContent = edit ? 'Edit Model' : 'Add New Model';
+                document.getElementById('modelForm').reset();
+                editingModelId = null;
+                if (edit && model) {
+                    document.getElementById('modelTitle').value = model.title;
+                    document.getElementById('modelDescription').value = model.description;
+                    document.getElementById('modelCategory').value = model.category;
+                    document.getElementById('modelImage').value = model.image || '';
+                    editingModelId = model.id;
+                }
+            }
+            function closeModal(modal) {
+                modal.classList.remove('active');
+            }
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    closeModal(btn.closest('.modal'));
+                });
+            });
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) closeModal(modal);
+                });
+            });
+            // Add/Edit Model submit
+            let editingModelId = null;
+            document.getElementById('modelForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('modelTitle').value.trim();
+                const description = document.getElementById('modelDescription').value.trim();
+                const category = document.getElementById('modelCategory').value;
+                const image = document.getElementById('modelImage').value.trim();
+                let models = getModels();
+                if (editingModelId) {
+                    models = models.map(m => m.id === editingModelId ? { ...m, title, description, category, image, icon: image.startsWith('http') ? '' : image, time: m.time, grades: m.grades, interactive: m.interactive } : m);
+                } else {
+                    const id = (models[models.length-1]?.id || 0) + 1;
+                    models.push({ id, title, description, category, image, icon: image.startsWith('http') ? '' : image, time: '15 min', grades: '8-12', interactive: false });
+                }
+                setModels(models);
+                renderModels(currentCategory, document.getElementById('modelSearch')?.value||'');
+                closeModal(document.getElementById('modelModal'));
+            });
+            // Edit/Delete/View Model
+            document.getElementById('modelsGrid').addEventListener('click', function(e) {
+                if (e.target.closest('.edit-model')) {
+                    const id = Number(e.target.closest('.edit-model').dataset.id);
+                    const model = getModels().find(m => m.id === id);
+                    openModelModal(true, model);
+                } else if (e.target.closest('.delete-model')) {
+                    const id = Number(e.target.closest('.delete-model').dataset.id);
+                    document.getElementById('confirmModelModal').classList.add('active');
+                    confirmModelAction = function() {
+                        let models = getModels();
+                        models = models.filter(m => m.id !== id);
+                        setModels(models);
+                        renderModels(currentCategory, document.getElementById('modelSearch')?.value||'');
+                        closeModal(document.getElementById('confirmModelModal'));
+                    };
+                } else if (e.target.closest('.view-model')) {
+                    const id = Number(e.target.closest('.view-model').dataset.id);
+                    const model = getModels().find(m => m.id === id);
+                    openModelViewer(model);
+                }
+            });
+            // Confirm delete
+            let confirmModelAction = null;
+            document.getElementById('confirmModelYes').addEventListener('click', function() {
+                if (confirmModelAction) confirmModelAction();
+                confirmModelAction = null;
+            });
+            // Model viewer
+            function openModelViewer(model) {
+                document.getElementById('modelViewerModal').classList.add('active');
+                document.getElementById('viewerModelTitle').textContent = model.title;
+                document.getElementById('viewerModelBody').innerHTML = `
+                    <div style="text-align:center;margin-bottom:20px;">
+                        <div class="model-preview ${model.category.toLowerCase().replace(/ /g,'-')}-bg" style="margin:0 auto;width:180px;height:180px;">
+                            <div class="model-placeholder" style="font-size:3rem;">
+                                ${model.image && model.image.startsWith('http') ? `<img src="${model.image}" alt="${model.title}" style="max-width:100%;max-height:100%;">` : `<i class="${model.icon||'fas fa-cube'}"></i>`}
+                            </div>
+                        </div>
+                    </div>
+                    <div><strong>Category:</strong> ${model.category}</div>
+                    <div><strong>Description:</strong> ${model.description}</div>
+                    <div><strong>Grades:</strong> ${model.grades||'8-12'}</div>
+                    <div><strong>Time:</strong> ${model.time||'15 min'}</div>
+                    <div><strong>Interactive:</strong> ${model.interactive ? 'Yes' : 'No'}</div>
+                `;
+            }
+            // Category filtering
+            let currentCategory = 'All Models';
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.textContent.trim();
+                    renderModels(currentCategory, document.getElementById('modelSearch')?.value||'');
+                });
+            });
+            // Search
+            const searchBar = document.createElement('input');
+            searchBar.type = 'text';
+            searchBar.id = 'modelSearch';
+            searchBar.placeholder = 'Search models...';
+            searchBar.style = 'width:100%;padding:8px 12px;border-radius:6px;border:1px solid #ddd;margin-bottom:18px;';
+            document.getElementById('modelsGrid').parentNode.insertBefore(searchBar, document.getElementById('modelsGrid'));
+            searchBar.addEventListener('input', function() {
+                renderModels(currentCategory, searchBar.value);
+            });
+            // Initial render
+            renderModels();
         });
     </script>
 </body>

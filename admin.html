@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - EduPlay</title>
+    <title>Admin Dashboard - SkillSphere</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -813,6 +813,75 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Responsive tweaks for admin panel */
+        @media (max-width: 768px) {
+            .admin-content {
+                grid-template-columns: 1fr !important;
+                flex-direction: column;
+            }
+            .data-table, .admin-panel {
+                padding: 10px !important;
+            }
+            .admin-tabs {
+                flex-wrap: wrap;
+                gap: 5px;
+                font-size: 0.95rem;
+            }
+            .admin-content-section {
+                padding: 0 !important;
+            }
+            .data-table table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
+                display: block;
+                width: 100%;
+            }
+            .data-table th, .data-table td {
+                text-align: left;
+                padding: 8px 6px;
+                border-bottom: 1px solid #eee;
+            }
+            .data-table tr {
+                margin-bottom: 10px;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            }
+            .data-table th {
+                background: #f8f9fa;
+                font-weight: 600;
+            }
+            .action-cell {
+                gap: 6px;
+            }
+            .modal-content {
+                width: 98vw !important;
+                max-width: 99vw !important;
+                padding: 0 !important;
+            }
+            .modal-body, .form-actions {
+                padding: 10px !important;
+            }
+            .form-group input, .form-group select {
+                font-size: 1rem;
+                padding: 10px 8px;
+            }
+        }
+        @media (max-width: 480px) {
+            .admin-tabs {
+                font-size: 0.85rem;
+                gap: 2px;
+            }
+            .modal-content {
+                padding: 0 !important;
+            }
+            .form-group label {
+                font-size: 0.95rem;
+            }
+            .btn, .btn-primary, .btn-outline {
+                font-size: 0.95rem;
+                padding: 7px 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -826,8 +895,8 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>EduPlay</span>
+                    <img src="logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">
+                    <span>SkillSphere</span>
                 </div>
             </div>
             <div class="sidebar-menu">
@@ -943,42 +1012,48 @@
                 </div>
                 
                 <div class="admin-tabs">
-                    <div class="tab active">Users</div>
-                    <div class="tab">Courses</div>
-                    <div class="tab">Content</div>
-                    <div class="tab">Videos</div>
-                    <div class="tab">Competitions</div>
-                    <div class="tab">Reports</div>
-                    <div class="tab">Settings</div>
+                    <div class="tab active" data-tab="users">Users</div>
+                    <div class="tab" data-tab="courses">Courses</div>
+                    <div class="tab" data-tab="content">Content</div>
+                    <div class="tab" data-tab="videos">Videos</div>
+                    <div class="tab" data-tab="competitions">Competitions</div>
+                    <div class="tab" data-tab="reports">Reports</div>
+                    <div class="tab" data-tab="settings">Settings</div>
                 </div>
                 
-                <div class="admin-content">
-                    <div class="data-table">
+                <!-- Admin Sections -->
+                <div class="admin-sections">
+                  <div class="admin-content-section" data-section="users" style="display:block;">
+                    <div class="admin-content">
+                      <!-- Users Table Search -->
+                      <div style="margin-bottom:10px;">
+                        <input type="text" id="userSearch" placeholder="Search users by name, email, or grade..." style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #ddd;">
+                      </div>
+                      <div class="data-table">
                         <div class="table-header">
-                            <h3 class="table-title">User Management</h3>
-                            <div class="table-actions">
-                                <button class="btn btn-outline">
-                                    <i class="fas fa-filter"></i> Filter
-                                </button>
-                                <button class="btn btn-primary" id="addUserBtn">
-                                    <i class="fas fa-plus"></i> Add User
-                                </button>
-                            </div>
+                          <h3 class="table-title">User Management</h3>
+                          <div class="table-actions">
+                            <button class="btn btn-outline">
+                              <i class="fas fa-filter"></i> Filter
+                            </button>
+                            <button class="btn btn-primary" id="addUserBtn">
+                              <i class="fas fa-plus"></i> Add User
+                            </button>
+                          </div>
                         </div>
-                        
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>User</th>
-                                    <th>Email</th>
-                                    <th>Grade</th>
-                                    <th>Status</th>
-                                    <th>Joined</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
+                          <thead>
+                            <tr>
+                              <th>User</th>
+                              <th>Email</th>
+                              <th>Grade</th>
+                              <th>Status</th>
+                              <th>Joined</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
                                     <td>
                                         <div style="display: flex; align-items: center; gap: 10px;">
                                             <div class="avatar">PS</div>
@@ -1063,11 +1138,10 @@
                                         <button class="action-btn"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
-                            </tbody>
+                          </tbody>
                         </table>
-                    </div>
-                    
-                    <div class="admin-panel">
+                      </div>
+                      <div class="admin-panel">
                         <h3 class="panel-title">Quick Actions</h3>
                         <div class="quick-action">
                             <div class="action-icon">
@@ -1115,6 +1189,90 @@
                             </div>
                         </div>
                     </div>
+                  </div>
+                  <div class="admin-content-section" data-section="courses" style="display:none;">
+                    <div class="admin-content">
+                      <!-- Courses Table Search -->
+                      <div style="margin-bottom:10px;">
+                        <input type="text" id="courseSearch" placeholder="Search courses by title, subject, or grade..." style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #ddd;">
+                      </div>
+                      <div class="data-table">
+                        <div class="table-header">
+                          <h3 class="table-title">Course Management</h3>
+                          <div class="table-actions">
+                            <button class="btn btn-primary" id="addCourseBtn">
+                              <i class="fas fa-plus"></i> Add Course
+                            </button>
+                          </div>
+                        </div>
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Title</th>
+                              <th>Subject</th>
+                              <th>Grade</th>
+                              <th>Lessons</th>
+                              <th>Enrolled</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- Course rows here -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-content-section" data-section="content" style="display:none;">
+                    <div class="admin-content">
+                      <div class="data-table">
+                        <div class="table-header">
+                          <h3 class="table-title">Content Management</h3>
+                        </div>
+                        <p>Content management features coming soon.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-content-section" data-section="videos" style="display:none;">
+                    <div class="admin-content">
+                      <div class="data-table">
+                        <div class="table-header">
+                          <h3 class="table-title">Video Management</h3>
+                        </div>
+                        <p>Video management features coming soon.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-content-section" data-section="competitions" style="display:none;">
+                    <div class="admin-content">
+                      <div class="data-table">
+                        <div class="table-header">
+                          <h3 class="table-title">Competition Management</h3>
+                        </div>
+                        <p>Competition management features coming soon.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-content-section" data-section="reports" style="display:none;">
+                    <div class="admin-content">
+                      <div class="data-table">
+                        <div class="table-header">
+                          <h3 class="table-title">Reports</h3>
+                        </div>
+                        <p>Reports and analytics coming soon.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-content-section" data-section="settings" style="display:none;">
+                    <div class="admin-content">
+                      <div class="data-table">
+                        <div class="table-header">
+                          <h3 class="table-title">System Settings</h3>
+                        </div>
+                        <p>Settings panel coming soon.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="recent-activities">
@@ -1206,18 +1364,432 @@
         </div>
     </div>
 
-    <!-- Add User Modal -->
-    <div class="modal" id="addUserModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add New User</h3>
-                <button class="close-modal">&times;</button>
+    <!-- Add/Edit User Modal (replaces Add User Modal) -->
+    <div class="modal" id="userModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="userModalTitle">Add New User</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="userForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="userName">Full Name</label>
+              <input type="text" id="userName" placeholder="Enter full name" required>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="userName">Full Name</label>
-                    <input type="text" id="userName" placeholder="Enter full name">
-                </div>
-                <div class="form-group">
-                    <label for="userEmail">Email Address</label>
-                    <input type="email" id="userEmail" placeholder="Enter email address">
+            <div class="form-group">
+              <label for="userEmail">Email Address</label>
+              <input type="email" id="userEmail" placeholder="Enter email address" required>
+            </div>
+            <div class="form-group">
+              <label for="userGrade">Grade</label>
+              <input type="number" id="userGrade" min="1" max="12" value="9" required>
+            </div>
+            <div class="form-group" id="userStatusGroup" style="display:none;">
+              <label for="userStatus">Status</label>
+              <select id="userStatus">
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="userFormSubmit">Save</button>
+            <button type="button" class="btn btn-outline close-modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Confirm Action</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body" id="confirmMessage">Are you sure?</div>
+        <div class="form-actions">
+          <button class="btn btn-danger" id="confirmYes">Yes</button>
+          <button class="btn btn-outline close-modal">No</button>
+        </div>
+      </div>
+    </div>
+    <!-- Add/Edit Course Modal -->
+    <div class="modal" id="courseModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="courseModalTitle">Add New Course</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="courseForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="courseTitle">Title</label>
+              <input type="text" id="courseTitle" placeholder="Enter course title" required>
+            </div>
+            <div class="form-group">
+              <label for="courseSubject">Subject</label>
+              <input type="text" id="courseSubject" placeholder="Enter subject" required>
+            </div>
+            <div class="form-group">
+              <label for="courseGrade">Grade</label>
+              <input type="number" id="courseGrade" min="1" max="12" value="9" required>
+            </div>
+            <div class="form-group">
+              <label for="courseLessons">Lessons</label>
+              <input type="number" id="courseLessons" min="1" max="100" value="10" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="courseFormSubmit">Save</button>
+            <button type="button" class="btn btn-outline close-modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Generic Quick Action Modal -->
+    <div class="modal" id="quickActionModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="quickActionModalTitle">Quick Action</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body" id="quickActionModalBody">This feature is coming soon.</div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline close-modal">Close</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // User table logic
+      const usersTableBody = document.querySelector('[data-section="users"] tbody');
+      const addUserBtn = document.getElementById('addUserBtn');
+      const userModal = document.getElementById('userModal');
+      const userForm = document.getElementById('userForm');
+      const userModalTitle = document.getElementById('userModalTitle');
+      const userStatusGroup = document.getElementById('userStatusGroup');
+      const userStatus = document.getElementById('userStatus');
+      const confirmModal = document.getElementById('confirmModal');
+      const confirmMessage = document.getElementById('confirmMessage');
+      let editingUserId = null;
+      let confirmAction = null;
+
+      function getUsers() {
+        return JSON.parse(localStorage.getItem('eduplay_users') || '[]');
+      }
+      function setUsers(users) {
+        localStorage.setItem('eduplay_users', JSON.stringify(users));
+      }
+      function renderUsers(filter = '') {
+        const users = getUsers();
+        const q = filter.trim().toLowerCase();
+        usersTableBody.innerHTML = users.filter(u =>
+          !q ||
+          (u.username && u.username.toLowerCase().includes(q)) ||
+          (u.email && u.email.toLowerCase().includes(q)) ||
+          (String(u.grade).includes(q))
+        ).map(u => `
+          <tr>
+            <td><div style="display: flex; align-items: center; gap: 10px;"><div class="avatar">${(u.username||'').split(' ').map(x=>x[0]).join('').toUpperCase()}</div><div>${u.username||''}</div></div></td>
+            <td>${u.email}</td>
+            <td>${u.grade}</td>
+            <td><span class="status status-${u.status||'active'}">${(u.status||'active').charAt(0).toUpperCase()+(u.status||'active').slice(1)}</span></td>
+            <td>${u.joined||'-'}</td>
+            <td class="action-cell">
+              <button class="action-btn edit-user" data-id="${u.id}"><i class="fas fa-edit"></i></button>
+              <button class="action-btn ban-user" data-id="${u.id}"><i class="fas fa-${u.status==='inactive'?'check':'ban'}"></i></button>
+              <button class="action-btn delete-user" data-id="${u.id}"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        `).join('');
+      }
+      function openUserModal(edit = false, user = null) {
+        userModal.classList.add('active');
+        userModalTitle.textContent = edit ? 'Edit User' : 'Add New User';
+        userStatusGroup.style.display = edit ? '' : 'none';
+        userForm.reset();
+        editingUserId = null;
+        if (edit && user) {
+          document.getElementById('userName').value = user.username;
+          document.getElementById('userEmail').value = user.email;
+          document.getElementById('userGrade').value = user.grade;
+          userStatus.value = user.status || 'active';
+          editingUserId = user.id;
+        }
+      }
+      function closeModal(modal) {
+        modal.classList.remove('active');
+      }
+      // Open Add User
+      addUserBtn?.addEventListener('click', function() {
+        openUserModal(false);
+      });
+      // Close modals
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', function() {
+          closeModal(btn.closest('.modal'));
+        });
+      });
+      // Modal background click
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) closeModal(modal);
+        });
+      });
+      // Submit Add/Edit User
+      userForm?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('userName').value.trim();
+        const email = document.getElementById('userEmail').value.trim();
+        const grade = document.getElementById('userGrade').value;
+        const status = userStatus.value;
+        if (!name || !email) {
+          alert('Please enter name and email.');
+          return;
+        }
+        let users = getUsers();
+        if (editingUserId) {
+          // Edit
+          users = users.map(u => u.id === editingUserId ? { ...u, username: name, email, grade: Number(grade), status } : u);
+        } else {
+          // Add
+          const id = (users[users.length-1]?.id || 0) + 1;
+          users.push({ id, username: name, email, grade: Number(grade), status: 'active', joined: new Date().toLocaleDateString() });
+        }
+        setUsers(users);
+        renderUsers();
+        closeModal(userModal);
+      });
+      // Edit User
+      usersTableBody?.addEventListener('click', function(e) {
+        if (e.target.closest('.edit-user')) {
+          const id = Number(e.target.closest('.edit-user').dataset.id);
+          const user = getUsers().find(u => u.id === id);
+          openUserModal(true, user);
+        } else if (e.target.closest('.ban-user')) {
+          const id = Number(e.target.closest('.ban-user').dataset.id);
+          const users = getUsers();
+          const user = users.find(u => u.id === id);
+          confirmMessage.textContent = user.status === 'inactive' ? 'Unban this user?' : 'Ban this user?';
+          confirmModal.classList.add('active');
+          confirmAction = function() {
+            user.status = user.status === 'inactive' ? 'active' : 'inactive';
+            setUsers(users);
+            renderUsers();
+            closeModal(confirmModal);
+          };
+        } else if (e.target.closest('.delete-user')) {
+          const id = Number(e.target.closest('.delete-user').dataset.id);
+          confirmMessage.textContent = 'Are you sure you want to delete this user?';
+          confirmModal.classList.add('active');
+          confirmAction = function() {
+            let users = getUsers();
+            users = users.filter(u => u.id !== id);
+            setUsers(users);
+            renderUsers();
+            closeModal(confirmModal);
+          };
+        }
+      });
+      // Confirm modal Yes
+      document.getElementById('confirmYes')?.addEventListener('click', function() {
+        if (confirmAction) confirmAction();
+        confirmAction = null;
+      });
+      // Initial render
+      renderUsers();
+
+      // Courses table logic
+      const coursesTableBody = document.querySelector('[data-section="courses"] tbody');
+      const addCourseBtn = document.getElementById('addCourseBtn');
+      const courseModal = document.getElementById('courseModal');
+      const courseForm = document.getElementById('courseForm');
+      const courseModalTitle = document.getElementById('courseModalTitle');
+      let editingCourseId = null;
+
+      function getCourses() {
+        return JSON.parse(localStorage.getItem('eduplay_courses') || '[]');
+      }
+      function setCourses(courses) {
+        localStorage.setItem('eduplay_courses', JSON.stringify(courses));
+      }
+      function renderCourses(filter = '') {
+        const courses = getCourses();
+        const q = filter.trim().toLowerCase();
+        coursesTableBody.innerHTML = courses.filter(c =>
+          !q ||
+          (c.title && c.title.toLowerCase().includes(q)) ||
+          (c.subject && c.subject.toLowerCase().includes(q)) ||
+          (String(c.grade).includes(q))
+        ).map(c => `
+          <tr>
+            <td>${c.title}</td>
+            <td>${c.subject}</td>
+            <td>${c.grade}</td>
+            <td>${c.lessons}</td>
+            <td>${c.enrolled || 0}</td>
+            <td class="action-cell">
+              <button class="action-btn edit-course" data-id="${c.id}"><i class="fas fa-edit"></i></button>
+              <button class="action-btn delete-course" data-id="${c.id}"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        `).join('');
+      }
+      function openCourseModal(edit = false, course = null) {
+        courseModal.classList.add('active');
+        courseModalTitle.textContent = edit ? 'Edit Course' : 'Add New Course';
+        courseForm.reset();
+        editingCourseId = null;
+        if (edit && course) {
+          document.getElementById('courseTitle').value = course.title;
+          document.getElementById('courseSubject').value = course.subject;
+          document.getElementById('courseGrade').value = course.grade;
+          document.getElementById('courseLessons').value = course.lessons;
+          editingCourseId = course.id;
+        }
+      }
+      function closeModal(modal) {
+        modal.classList.remove('active');
+      }
+      // Open Add Course
+      addCourseBtn?.addEventListener('click', function() {
+        openCourseModal(false);
+      });
+      // Close modals
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', function() {
+          closeModal(btn.closest('.modal'));
+        });
+      });
+      // Modal background click
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) closeModal(modal);
+        });
+      });
+      // Submit Add/Edit Course
+      courseForm?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const title = document.getElementById('courseTitle').value.trim();
+        const subject = document.getElementById('courseSubject').value.trim();
+        const grade = document.getElementById('courseGrade').value;
+        const lessons = document.getElementById('courseLessons').value;
+        if (!title || !subject) {
+          alert('Please enter title and subject.');
+          return;
+        }
+        let courses = getCourses();
+        if (editingCourseId) {
+          // Edit
+          courses = courses.map(c => c.id === editingCourseId ? { ...c, title, subject, grade: Number(grade), lessons: Number(lessons) } : c);
+        } else {
+          // Add
+          const id = (courses[courses.length-1]?.id || 0) + 1;
+          courses.push({ id, title, subject, grade: Number(grade), lessons: Number(lessons), enrolled: 0 });
+        }
+        setCourses(courses);
+        renderCourses();
+        closeModal(courseModal);
+      });
+      // Edit/Delete Course
+      coursesTableBody?.addEventListener('click', function(e) {
+        if (e.target.closest('.edit-course')) {
+          const id = Number(e.target.closest('.edit-course').dataset.id);
+          const course = getCourses().find(c => c.id === id);
+          openCourseModal(true, course);
+        } else if (e.target.closest('.delete-course')) {
+          const id = Number(e.target.closest('.delete-course').dataset.id);
+          confirmMessage.textContent = 'Are you sure you want to delete this course?';
+          confirmModal.classList.add('active');
+          confirmAction = function() {
+            let courses = getCourses();
+            courses = courses.filter(c => c.id !== id);
+            setCourses(courses);
+            renderCourses();
+            closeModal(confirmModal);
+          };
+        }
+      });
+      // Initial render
+      renderCourses();
+
+      // Quick Actions logic
+      const quickActions = document.querySelectorAll('.quick-action');
+      const quickActionModal = document.getElementById('quickActionModal');
+      const quickActionModalTitle = document.getElementById('quickActionModalTitle');
+      const quickActionModalBody = document.getElementById('quickActionModalBody');
+
+      quickActions.forEach((action, idx) => {
+        action.addEventListener('click', function() {
+          switch(idx) {
+            case 0: // Add New Course
+              courseModal.classList.add('active');
+              break;
+            case 1: // Create Competition
+              quickActionModalTitle.textContent = 'Create Competition';
+              quickActionModalBody.textContent = 'Competition creation feature is coming soon!';
+              quickActionModal.classList.add('active');
+              break;
+            case 2: // Send Announcement
+              quickActionModalTitle.textContent = 'Send Announcement';
+              quickActionModalBody.textContent = 'Announcement feature is coming soon!';
+              quickActionModal.classList.add('active');
+              break;
+            case 3: // Generate Reports
+              quickActionModalTitle.textContent = 'Generate Reports';
+              quickActionModalBody.textContent = 'Reports and analytics are coming soon!';
+              quickActionModal.classList.add('active');
+              break;
+            case 4: // System Settings
+              quickActionModalTitle.textContent = 'System Settings';
+              quickActionModalBody.textContent = 'Settings panel is coming soon!';
+              quickActionModal.classList.add('active');
+              break;
+            default:
+              quickActionModalTitle.textContent = 'Quick Action';
+              quickActionModalBody.textContent = 'This feature is coming soon.';
+              quickActionModal.classList.add('active');
+          }
+        });
+      });
+
+      // System Health dynamic updates
+      function setHealthMetric(selector, value, statusClass) {
+        const fill = document.querySelector(selector + ' .progress-fill');
+        const status = document.querySelector(selector + ' .health-status');
+        if (fill) {
+          fill.style.width = value + '%';
+          fill.className = 'progress-fill ' + statusClass;
+        }
+        if (status) {
+          status.className = 'health-status ' + statusClass;
+        }
+      }
+      // Simulate values (could be replaced with real data)
+      const uptime = 99.9;
+      const storage = Math.floor(60 + Math.random() * 30); // 60-90%
+      const apiTime = Math.floor(80 + Math.random() * 80); // 80-160ms
+      const activeUsers = Math.floor(800 + Math.random() * 400); // 800-1200
+
+      setHealthMetric('.system-health .health-item:nth-child(2)', uptime, 'status-good');
+      setHealthMetric('.system-health .health-item:nth-child(3)', storage, storage > 80 ? 'status-warning' : 'status-good');
+      setHealthMetric('.system-health .health-item:nth-child(4)', 85, 'status-good'); // API Response Time (static bar)
+      setHealthMetric('.system-health .health-item:nth-child(5)', 65, 'status-good'); // Active Users (static bar)
+
+      // Update text values
+      document.querySelector('.system-health .health-item:nth-child(2) .health-status').textContent = uptime + '%';
+      document.querySelector('.system-health .health-item:nth-child(3) .health-status').textContent = storage + '%';
+      document.querySelector('.system-health .health-item:nth-child(4) .health-status').textContent = apiTime + 'ms';
+      document.querySelector('.system-health .health-item:nth-child(5) .health-status').textContent = activeUsers;
+
+      // Animate progress bars
+      document.querySelectorAll('.system-health .progress-fill').forEach(bar => {
+        bar.style.transition = 'width 1s';
+      });
+    });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizzes - EduPlay</title>
+    <title>Quizzes - SkillSphere</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -793,8 +793,8 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>EduPlay</span>
+                    <img src="logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">
+                    <span>SkillSphere</span>
                 </div>
             </div>
             <div class="sidebar-menu">
@@ -919,256 +919,16 @@
                 </div>
                 
                 <h2 class="section-title"><i class="fas fa-star"></i> Recommended Quizzes</h2>
-                <div class="quizzes-grid">
-                    <div class="quiz-card">
-                        <div class="quiz-header math-bg">
-                            <div class="quiz-icon">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <div class="quiz-badge">Mathematics</div>
-                            <div class="quiz-timer">
-                                <i class="fas fa-clock"></i> 10 min
-                            </div>
-                        </div>
-                        <div class="quiz-body">
-                            <h3>Algebra Basics</h3>
-                            <p>Test your knowledge of linear equations, inequalities, and algebraic expressions.</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-difficulty">
-                                    <span>Difficulty:</span>
-                                    <div class="difficulty-dot difficulty-medium"></div>
-                                    <span>Medium</span>
-                                </div>
-                                <span>15 Questions</span>
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <div class="xp-reward">
-                                <i class="fas fa-bolt"></i>
-                                <span>150 XP</span>
-                            </div>
-                            <button class="btn btn-primary start-quiz" data-quiz="algebra">Start Quiz</button>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-card">
-                        <div class="quiz-header science-bg">
-                            <div class="quiz-icon">
-                                <i class="fas fa-atom"></i>
-                            </div>
-                            <div class="quiz-badge">Science</div>
-                            <div class="quiz-timer">
-                                <i class="fas fa-clock"></i> 15 min
-                            </div>
-                        </div>
-                        <div class="quiz-body">
-                            <h3>Atomic Structure</h3>
-                            <p>Test your understanding of atoms, electrons, protons, and atomic models.</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-difficulty">
-                                    <span>Difficulty:</span>
-                                    <div class="difficulty-dot difficulty-hard"></div>
-                                    <span>Hard</span>
-                                </div>
-                                <span>20 Questions</span>
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <div class="xp-reward">
-                                <i class="fas fa-bolt"></i>
-                                <span>200 XP</span>
-                            </div>
-                            <button class="btn btn-primary start-quiz" data-quiz="atomic">Start Quiz</button>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-card">
-                        <div class="quiz-header english-bg">
-                            <div class="quiz-icon">
-                                <i class="fas fa-language"></i>
-                            </div>
-                            <div class="quiz-badge">English</div>
-                            <div class="quiz-timer">
-                                <i class="fas fa-clock"></i> 8 min
-                            </div>
-                        </div>
-                        <div class="quiz-body">
-                            <h3>Grammar Mastery</h3>
-                            <p>Test your knowledge of tenses, parts of speech, and sentence structure.</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-difficulty">
-                                    <span>Difficulty:</span>
-                                    <div class="difficulty-dot difficulty-easy"></div>
-                                    <span>Easy</span>
-                                </div>
-                                <span>12 Questions</span>
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <div class="xp-reward">
-                                <i class="fas fa-bolt"></i>
-                                <span>120 XP</span>
-                            </div>
-                            <button class="btn btn-primary start-quiz" data-quiz="grammar">Start Quiz</button>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-card">
-                        <div class="quiz-header history-bg">
-                            <div class="quiz-icon">
-                                <i class="fas fa-monument"></i>
-                            </div>
-                            <div class="quiz-badge">History</div>
-                            <div class="quiz-timer">
-                                <i class="fas fa-clock"></i> 12 min
-                            </div>
-                        </div>
-                        <div class="quiz-body">
-                            <h3>World War II</h3>
-                            <p>Test your knowledge of key events, figures, and outcomes of WWII.</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-difficulty">
-                                    <span>Difficulty:</span>
-                                    <div class="difficulty-dot difficulty-medium"></div>
-                                    <span>Medium</span>
-                                </div>
-                                <span>18 Questions</span>
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <div class="xp-reward">
-                                <i class="fas fa-bolt"></i>
-                                <span>180 XP</span>
-                            </div>
-                            <button class="btn btn-primary start-quiz" data-quiz="wwii">Start Quiz</button>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-card">
-                        <div class="quiz-header geography-bg">
-                            <div class="quiz-icon">
-                                <i class="fas fa-globe-asia"></i>
-                            </div>
-                            <div class="quiz-badge">Geography</div>
-                            <div class="quiz-timer">
-                                <i class="fas fa-clock"></i> 10 min
-                            </div>
-                        </div>
-                        <div class="quiz-body">
-                            <h3>World Capitals</h3>
-                            <p>Test your knowledge of capital cities around the world.</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-difficulty">
-                                    <span>Difficulty:</span>
-                                    <div class="difficulty-dot difficulty-easy"></div>
-                                    <span>Easy</span>
-                                </div>
-                                <span>15 Questions</span>
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <div class="xp-reward">
-                                <i class="fas fa-bolt"></i>
-                                <span>150 XP</span>
-                            </div>
-                            <button class="btn btn-primary start-quiz" data-quiz="capitals">Start Quiz</button>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-card">
-                        <div class="quiz-header math-bg">
-                            <div class="quiz-icon">
-                                <i class="fas fa-shapes"></i>
-                            </div>
-                            <div class="quiz-badge">Mathematics</div>
-                            <div class="quiz-timer">
-                                <i class="fas fa-clock"></i> 15 min
-                            </div>
-                        </div>
-                        <div class="quiz-body">
-                            <h3>Geometry Basics</h3>
-                            <p>Test your knowledge of angles, shapes, and geometric theorems.</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-difficulty">
-                                    <span>Difficulty:</span>
-                                    <div class="difficulty-dot difficulty-medium"></div>
-                                    <span>Medium</span>
-                                </div>
-                                <span>16 Questions</span>
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <div class="xp-reward">
-                                <i class="fas fa-bolt"></i>
-                                <span>160 XP</span>
-                            </div>
-                            <button class="btn btn-primary start-quiz" data-quiz="geometry">Start Quiz</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Algebra Quiz -->
-                <div class="quiz-container" id="algebra-quiz">
-                    <div class="quiz-header-bar">
-                        <h2 class="quiz-title">Algebra Basics Quiz</h2>
-                        <div class="quiz-progress">
-                            <span class="progress-text">Question <span id="current-question">1</span> of 5</span>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="quiz-progress" style="width: 20%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-container">
-                        <h3 class="question-text" id="question-text">What is the value of x in the equation: 2x + 5 = 13?</h3>
-                        
-                        <div class="options-container" id="options-container">
-                            <div class="option" data-value="4">4</div>
-                            <div class="option" data-value="5">5</div>
-                            <div class="option" data-value="6">6</div>
-                            <div class="option" data-value="7">7</div>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-controls">
-                        <button class="btn btn-outline" id="prev-btn" disabled>Previous</button>
-                        <button class="btn btn-primary btn-large" id="next-btn">Next Question</button>
-                    </div>
-                </div>
-                
-                <!-- Results Container -->
-                <div class="results-container" id="results-container">
-                    <div class="results-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h2 class="results-title">Quiz Completed!</h2>
-                    <div class="results-score">80%</div>
-                    
-                    <div class="results-stats">
-                        <div class="result-stat">
-                            <h4>Correct Answers</h4>
-                            <p>4/5</p>
-                        </div>
-                        <div class="result-stat">
-                            <h4>Time Taken</h4>
-                            <p>2:30</p>
-                        </div>
-                        <div class="result-stat">
-                            <h4>XP Earned</h4>
-                            <p>150</p>
-                        </div>
-                    </div>
-                    
-                    <div class="results-actions">
-                        <button class="btn btn-outline">Review Answers</button>
-                        <button class="btn btn-primary">Try Again</button>
-                        <button class="btn btn-primary">Next Quiz</button>
-                    </div>
-                </div>
+                <div class="quizzes-grid" id="quizzesGrid"></div>
+                <!-- Dynamic Quiz Container -->
+                <div class="quiz-container" id="quizContainer"></div>
+                <!-- Dynamic Results Container -->
+                <div class="results-container" id="resultsContainer"></div>
             </div>
         </div>
     </div>
 
+    <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Check if user is logged in
@@ -1198,9 +958,126 @@
                 }
             });
 
-            // Category buttons
-            const categoryButtons = document.querySelectorAll('.category-btn');
-            categoryButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // --- Dynamic Quiz Cards ---
+            const QUIZ_META = {
+                math: {
+                    title: 'Algebra Basics',
+                    desc: 'Test your knowledge of linear equations, inequalities, and algebraic expressions.',
+                    icon: 'fas fa-calculator',
+                    bg: 'math-bg',
+                    badge: 'Mathematics',
+                    time: '10 min',
+                    difficulty: 'medium',
+                    questions: 5,
+                    xp: 150
+                },
+                science: {
+                    title: 'Atomic Structure',
+                    desc: 'Test your understanding of atoms, electrons, protons, and atomic models.',
+                    icon: 'fas fa-atom',
+                    bg: 'science-bg',
+                    badge: 'Science',
+                    time: '15 min',
+                    difficulty: 'hard',
+                    questions: 5,
+                    xp: 200
+                },
+                english: {
+                    title: 'Grammar Mastery',
+                    desc: 'Test your knowledge of tenses, parts of speech, and sentence structure.',
+                    icon: 'fas fa-language',
+                    bg: 'english-bg',
+                    badge: 'English',
+                    time: '8 min',
+                    difficulty: 'easy',
+                    questions: 5,
+                    xp: 120
+                },
+                history: {
+                    title: 'World War II',
+                    desc: 'Test your knowledge of key events, figures, and outcomes of WWII.',
+                    icon: 'fas fa-monument',
+                    bg: 'history-bg',
+                    badge: 'History',
+                    time: '12 min',
+                    difficulty: 'medium',
+                    questions: 5,
+                    xp: 180
+                },
+                geography: {
+                    title: 'World Capitals',
+                    desc: 'Test your knowledge of capital cities around the world.',
+                    icon: 'fas fa-globe-asia',
+                    bg: 'geography-bg',
+                    badge: 'Geography',
+                    time: '10 min',
+                    difficulty: 'easy',
+                    questions: 5,
+                    xp: 150
+                }
+            };
+            const quizzesGrid = document.getElementById('quizzesGrid');
+            function renderQuizCards(filterCat = 'All Quizzes', search = '') {
+                const metaKeys = Object.keys(QUIZ_META);
+                const q = search.trim().toLowerCase();
+                quizzesGrid.innerHTML = metaKeys.filter(k =>
+                    (filterCat === 'All Quizzes' || QUIZ_META[k].badge === filterCat) &&
+                    (!q || QUIZ_META[k].title.toLowerCase().includes(q) || QUIZ_META[k].desc.toLowerCase().includes(q))
+                ).map(k => {
+                    const m = QUIZ_META[k];
+                    return `<div class="quiz-card">
+                        <div class="quiz-header ${m.bg}">
+                            <div class="quiz-icon"><i class="${m.icon}"></i></div>
+                            <div class="quiz-badge">${m.badge}</div>
+                            <div class="quiz-timer"><i class="fas fa-clock"></i> ${m.time}</div>
+                        </div>
+                        <div class="quiz-body">
+                            <h3>${m.title}</h3>
+                            <p>${m.desc}</p>
+                            <div class="quiz-meta">
+                                <div class="quiz-difficulty">
+                                    <span>Difficulty:</span>
+                                    <div class="difficulty-dot difficulty-${m.difficulty}"></div>
+                                    <span>${m.difficulty.charAt(0).toUpperCase()+m.difficulty.slice(1)}</span>
+                                </div>
+                                <span>${m.questions} Questions</span>
+                            </div>
+                        </div>
+                        <div class="quiz-footer">
+                            <div class="xp-reward"><i class="fas fa-bolt"></i> <span>${m.xp} XP</span></div>
+                            <button class="btn btn-primary start-quiz" data-quiz="${k}">Start Quiz</button>
+                        </div>
+                    </div>`;
+                }).join('') || '<div style="padding:40px;text-align:center;color:#888;">No quizzes found.</div>';
+            }
+            // Category filtering
+            let currentCategory = 'All Quizzes';
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
+                    currentCategory = this.textContent.trim();
+                    renderQuizCards(currentCategory, document.getElementById('quizSearch')?.value||'');
+                });
+            });
+            // Search
+            const searchBar = document.createElement('input');
+            searchBar.type = 'text';
+            searchBar.id = 'quizSearch';
+            searchBar.placeholder = 'Search quizzes...';
+            searchBar.style = 'width:100%;padding:8px 12px;border-radius:6px;border:1px solid #ddd;margin-bottom:18px;';
+            quizzesGrid.parentNode.insertBefore(searchBar, quizzesGrid);
+            searchBar.addEventListener('input', function() {
+                renderQuizCards(currentCategory, searchBar.value);
+            });
+            // Initial render
+            renderQuizCards();
+
+            // --- Quiz Taking Logic ---
+            // Use script.js wireQuizzes for quiz flow
+            // Remove any hardcoded quiz containers/results
+            // The script.js wireQuizzes will handle quizContainer/resultsContainer
+        });
+    </script>
+</body>
+</html>
