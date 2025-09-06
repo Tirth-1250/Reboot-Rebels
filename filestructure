@@ -1,0 +1,16 @@
+gamified-learning-platform/
+├── index.html              # Main dashboard
+├── curriculum.html         # School Curriculum
+├── skills.html            # Real-Life Skills
+├── models.html            # 3D Models & Experiments
+├── quizzes.html           # Quizzes
+├── mindmaps.html          # Mind Maps
+├── games.html             # Subject Games
+├── videos.html            # Student Videos
+├── competitions.html      # Festive & Competitions Zone
+├── leaderboard.html       # Ranking & Leaderboard
+├── admin.html             # Admin Dashboard
+├── login.html             # Login Page
+├── register.html          # Registration Page
+├── styles.css             # Shared CSS styles
+└── script.js              # Shared JavaScript

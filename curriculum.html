@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum - EduPlay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --danger: #ef233c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --sidebar-width: 250px;
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--warning);
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--warning);
+        }
+
+        .menu-item i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info {
+            line-height: 1.3;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .user-rank {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .logout-btn {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            padding-top: calc(var(--header-height) + 20px);
+        }
+
+        /* Header */
+        .header {
+            height: var(--header-height);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: var(--sidebar-width);
+            z-index: 100;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 8px 15px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-btn {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Curriculum Content */
+        .content-section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .section-title {
+            margin: 30px 0 20px;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .grade-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .grade-btn {
+            padding: 10px 25px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .grade-btn.active, .grade-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .subject-header {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .math-bg {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        }
+
+        .science-bg {
+            background: linear-gradient(135deg, #f72585, #b5179e);
+        }
+
+        .english-bg {
+            background: linear-gradient(135deg, #4cc9f0, #4895ef);
+        }
+
+        .social-bg {
+            background: linear-gradient(135deg, #ff9e00, #ff6b00);
+        }
+
+        .computer-bg {
+            background: linear-gradient(135deg, #7209b7, #560bad);
+        }
+
+        .subject-body {
+            padding: 20px;
+        }
+
+        .subject-body h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .subject-body p {
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .subject-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--success);
+            border-radius: 4px;
+        }
+
+        .subject-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .chapters-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .chapters-container.active {
+            display: block;
+        }
+
+        .chapter-item {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+
+        .chapter-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chapter-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .chapter-details h4 {
+            margin-bottom: 5px;
+        }
+
+        .chapter-details p {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+
+        .chapter-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(255, 186, 8, 0.2);
+            color: var(--warning);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 0;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+                width: var(--sidebar-width);
+            }
+            
+            .main-content, .header {
+                margin-left: 0;
+                left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                width: 200px;
+            }
+            
+            .filters, .grade-selector {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        /* Toggle Button */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>EduPlay</span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="curriculum.html" class="menu-item active">
+                    <i class="fas fa-book"></i>
+                    <span>Curriculum</span>
+                </a>
+                <a href="skills.html" class="menu-item">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Life Skills</span>
+                </a>
+                <a href="models.html" class="menu-item">
+                    <i class="fas fa-cube"></i>
+                    <span>3D Models</span>
+                </a>
+                <a href="quizzes.html" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Quizzes</span>
+                </a>
+                <a href="mindmaps.html" class="menu-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Mind Maps</span>
+                </a>
+                <a href="games.html" class="menu-item">
+                    <i class="fas fa-dice"></i>
+                    <span>Games</span>
+                </a>
+                <a href="videos.html" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Videos</span>
+                </a>
+                <a href="competitions.html" class="menu-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Competitions</span>
+                </a>
+                <a href="leaderboard.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Leaderboard</span>
+                </a>
+                <a href="admin.html" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">RS</div>
+                    <div class="user-info">
+                        <div class="user-name">Rahul Sharma</div>
+                        <div class="user-rank">Math Explorer • Level 12</div>
+                    </div>
+                </div>
+                <a href="login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for courses, lessons, or topics...">
+                </div>
+                <div class="header-actions">
+                    <div class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Curriculum Content -->
+            <div class="content-section">
+                <h1 class="section-title"><i class="fas fa-book"></i> School Curriculum</h1>
+                <p>Explore subjects and lessons tailored to your grade level. Track your progress and unlock achievements as you learn!</p>
+                
+                <div class="filters">
+                    <div class="filter-btn active">All Subjects</div>
+                    <div class="filter-btn">Mathematics</div>
+                    <div class="filter-btn">Science</div>
+                    <div class="filter-btn">English</div>
+                    <div class="filter-btn">Social Studies</div>
+                    <div class="filter-btn">Computer Science</div>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Select Your Grade</h2>
+                <div class="grade-selector">
+                    <div class="grade-btn">Grade 8</div>
+                    <div class="grade-btn active">Grade 9</div>
+                    <div class="grade-btn">Grade 10</div>
+                    <div class="grade-btn">Grade 11</div>
+                    <div class="grade-btn">Grade 12</div>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-subject"></i> Subjects</h2>
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <div class="subject-header math-bg">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="subject-body">
+                            <h3>Mathematics</h3>
+                            <p>Explore algebra, geometry, calculus, and more. Develop problem-solving skills and logical thinking.</p>
+                            <div class="subject-stats">
+                                <span>24 Lessons</span>
+                                <span>8 Chapters</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 65%"></div>
+                            </div>
+                            <span>65% complete</span>
+                        </div>
+                        <div class="subject-footer">
+                            <span>Grade 9</span>
+                            <button class="btn btn-primary view-chapters" data-subject="math">View Chapters</button>
+                        </div>
+                    </div>
+                    
+                    <div class="subject-card">
+                        <div class="subject-header science-bg">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="subject-body">
+                            <h3>Science</h3>
+                            <p>Discover physics, chemistry, biology, and environmental science through interactive experiments.</p>
+                            <div class="subject-stats">
+                                <span>18 Lessons</span>
+                                <span>6 Chapters</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 30%"></div>
+                            </div>
+                            <span>30% complete</span>
+                        </div>
+                        <div class="subject-footer">
+                            <span>Grade 9</span>
+                            <button class="btn btn-primary view-chapters" data-subject="science">View Chapters</button>
+                        </div>
+                    </div>
+                    
+                    <div class="subject-card">
+                        <div class="subject-header english-bg">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="subject-body">
+                            <h3>English</h3>
+                            <p>Improve reading comprehension, writing skills, and literary analysis with engaging texts.</p>
+                            <div class="subject-stats">
+                                <span>20 Lessons</span>
+                                <span>7 Chapters</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%"></div>
+                            </div>
+                            <span>80% complete</span>
+                        </div>
+                        <div class="subject-footer">
+                            <span>Grade 9</span>
+                            <button class="btn btn-primary view-chapters" data-subject="english">View Chapters</button>
+                        </div>
+                    </div>
+                    
+                    <div class="subject-card">
+                        <div class="subject-header social-bg">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <div class="subject-body">
+                            <h3>Social Studies</h3>
+                            <p>Explore history, geography, civics, and economics to understand our world better.</p>
+                            <div class="subject-stats">
+                                <span>16 Lessons</span>
+                                <span>5 Chapters</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 45%"></div>
+                            </div>
+                            <span>45% complete</span>
+                        </div>
+                        <div class="subject-footer">
+                            <span>Grade 9</span>
+                            <button class="btn btn-primary view-chapters" data-subject="social">View Chapters</button>
+                        </div>
+                    </div>
+                    
+                    <div class="subject-card">
+                        <div class="subject-header computer-bg">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="subject-body">
+                            <h3>Computer Science</h3>
+                            <p>Learn programming, algorithms, and computational thinking through hands-on projects.</p>
+                            <div class="subject-stats">
+                                <span>22 Lessons</span>
+                                <span>8 Chapters</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 25%"></div>
+                            </div>
+                            <span>25% complete</span>
+                        </div>
+                        <div class="subject-footer">
+                            <span>Grade 9</span>
+                            <button class="btn btn-primary view-chapters" data-subject="computer">View Chapters</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Math Chapters -->
+                <div class="chapters-container" id="math-chapters">
+                    <h2 class="section-title"><i class="fas fa-calculator"></i> Mathematics Chapters</h2>
+                    <div class="chapter-item">
+                        <div class="chapter-info">
+                            <div class="chapter-icon">
+                                <i class="fas fa-1"></i>
+                            </div>
+                            <div class="chapter-details">
+                                <h4>Algebra Basics</h4>
+                                <p>Linear equations, inequalities, and expressions</p>
+                            </div>
+                        </div>
+                        <div class="chapter-status">
+                            <span class="status-badge status-completed">Completed</span>
+                            <button class="btn btn-primary">Review</button>
+                        </div>
+                    </div>
+                    <div class="chapter-item">
+                        <div class="chapter-info">
+                            <div class="chapter-icon">
+                                <i class="fas fa-2"></i>
+                            </div>
+                            <div class="chapter-details">
+                                <h4>Geometry</h4>
+                                <p>Angles, triangles, circles, and polygons</p>
+                            </div>
+                        </div>
+                        <div class="chapter-status">
+                            <span class="status-badge status-completed">Completed</span>
+                            <button class="btn btn-primary">Review</button>
+                        </div>
+                    </div>
+                    <div class="chapter-item">
+                        <div class="chapter-info">
+                            <div class="chapter-icon">
+                                <i class="fas fa-3"></i>
+                            </div>
+                            <div class="chapter-details">
+                                <h4>Trigonometry</h4>
+                                <p>Trigonometric functions and identities</p>
+                            </div>
+                        </div>
+                        <div class="chapter-status">
+                            <span class="status-badge status-pending">In Progress</span>
+                            <button class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                    <div class="chapter-item">
+                        <div class="chapter-info">
+                            <div class="chapter-icon">
+                                <i class="fas fa-4"></i>
+                            </div>
+                            <div class="chapter-details">
+                                <h4>Calculus Introduction</h4>
+                                <p>Limits, derivatives, and integrals</p>
+                            </div>
+                        </div>
+                        <div class="chapter-status">
+                            <span class="status-badge status-pending">Not Started</span>
+                            <button class="btn btn-primary">Start</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Science Chapters -->
+                <div class="chapters-container" id="science-chapters">
+                    <h2 class="section-title"><i class="fas fa-atom"></i> Science Chapters</h2>
+                    <div class="chapter-item">
+                        <div class="chapter-info">
+                            <div class="chapter-icon">
+                                <i class="fas fa-1"></i>
+                            </div>
+                            <div class="chapter-details">
+                                <h4>Atomic Structure</h4>
+                                <p>Atoms, molecules, and the periodic table</p>
+                            </div>
+                        </div>
+                        <div class="chapter-status">
+                            <span class="status-badge status-completed">Completed</span>
+                            <button class="btn btn-primary">Review</button>
+                        </div>
+                    </div>
+                    <div class="chapter-item">
+                        <div class="chapter-info">
+                            <div class="chapter-icon">
+                                <i class="fas fa-2"></i>
+                            </div>
+                            <div class="chapter-details">
+                                <h4>Forces and Motion</h4>
+                                <p>Newton's laws of motion and gravity</p>
+                            </div>
+                        </div>
+                        <div class="chapter-status">
+                            <span class="status-badge status-pending">In Progress</span>
+                            <button class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize user data if not exists
+            if (!localStorage.getItem('eduplay_users')) {
+                const defaultUsers = [
+                    {
+                        id: 1,
+                        username: 'rahulsharma',
+                        email: 'rahul@example.com',
+                        password: 'password123',
+                        grade: 10,
+                        xp: 2450,
+                        level: 12,
+                        badges: ['mathwizard', 'quicklearner', 'quizmaster'],
+                        streak: 12,
+                        enrolledCourses: [1, 2, 3],
+                        completedLessons: [1, 2, 3, 4, 5, 6, 7, 8]
+                    }
+                ];
+                localStorage.setItem('eduplay_users', JSON.stringify(defaultUsers));
+            }
+
+            // Check if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+            }
+
+            // Mobile menu toggle
+            const menuToggle = document.createElement('div');
+            menuToggle.className = 'menu-toggle';
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.appendChild(menuToggle);
+
+            menuToggle.addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.toggle('open');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                const sidebar = document.querySelector('.sidebar');
+                const isToggle = event.target.closest('.menu-toggle');
+                const isSidebar = event.target.closest('.sidebar');
+                
+                if (window.innerWidth < 992 && sidebar.classList.contains('open') && !isToggle && !isSidebar) {
+                    sidebar.classList.remove('open');
+                }
+            });
+
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, this would filter the subjects
+                });
+            });
+
+            // Grade buttons
+            const gradeButtons = document.querySelectorAll('.grade-btn');
+            gradeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    gradeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, this would change the grade level
+                });
+            });
+
+            // View chapters buttons
+            const viewChapterButtons = document.querySelectorAll('.view-chapters');
+            const chapterContainers = document.querySelectorAll('.chapters-container');
+            
+            viewChapterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const subject = this.getAttribute('data-subject');
+                    
+                    // Hide all chapter containers
+                    chapterContainers.forEach(container => {
+                        container.classList.remove('active');
+                    });
+                    
+                    // Show the selected subject's chapters
+                    document.getElementById(`${subject}-chapters`).classList.add('active');
+                    
+                    // Scroll to the chapters
+                    document.getElementById(`${subject}-chapters`).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Simulate loading animation for progress bars
+            document.querySelectorAll('.progress').forEach(progress => {
+                const width = progress.style.width;
+                progress.style.width = '0';
+                setTimeout(() => {
+                    progress.style.transition = 'width 1s ease';
+                    progress.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

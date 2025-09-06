@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPlay - Gamified Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>EduPlay</span>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html" class="menu-item active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="curriculum.html" class="menu-item">
+                <i class="fas fa-book"></i>
+                <span>Curriculum</span>
+            </a>
+            <a href="skills.html" class="menu-item">
+                <i class="fas fa-life-ring"></i>
+                <span>Life Skills</span>
+            </a>
+            <a href="models.html" class="menu-item">
+                <i class="fas fa-cube"></i>
+                <span>3D Models</span>
+            </a>
+            <a href="quizzes.html" class="menu-item">
+                <i class="fas fa-question-circle"></i>
+                <span>Quizzes</span>
+            </a>
+            <a href="mindmaps.html" class="menu-item">
+                <i class="fas fa-project-diagram"></i>
+                <span>Mind Maps</span>
+            </a>
+            <a href="games.html" class="menu-item">
+                <i class="fas fa-dice"></i>
+                <span>Games</span>
+            </a>
+            <a href="videos.html" class="menu-item">
+                <i class="fas fa-video"></i>
+                <span>Videos</span>
+            </a>
+            <a href="competitions.html" class="menu-item">
+                <i class="fas fa-trophy"></i>
+                <span>Competitions</span>
+            </a>
+            <a href="leaderboard.html" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Leaderboard</span>
+            </a>
+            <a href="admin.html" class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Admin</span>
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">RS</div>
+                <div class="user-info">
+                    <div class="user-name">Rahul Sharma</div>
+                    <div class="user-rank">Math Explorer • Level 12</div>
+                </div>
+            </div>
+            <a href="login.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for courses, games, or resources...">
+            </div>
+            <div class="header-actions">
+                <div class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="content-section">
+            <h1 class="section-title"><i class="fas fa-home"></i> Student Dashboard</h1>
+            
+            <div class="dashboard">
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: var(--primary);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Courses Enrolled</p>
+                    </div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: var(--success);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>48</h3>
+                        <p>Lessons Completed</p>
+                    </div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: var(--warning);">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>15</h3>
+                        <p>Achievements</p>
+                    </div>
+                </div>
+                
+                <div class="card streak-card">
+                    <i class="fas fa-fire"></i>
+                    <div class="streak-count">12 days</div>
+                    <p>Current Learning Streak</p>
+                </div>
+            </div>
+            
+            <h2 class="section-title"><i class="fas fa-book"></i> Continue Learning</h2>
+            <div class="grid-container">
+                <div class="course-card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Algebra Basics</h3>
+                        <p>Master linear equations and inequalities</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <span>65% complete</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Grade 9 • Mathematics</span>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="card-header" style="background: linear-gradient(135deg, #f72585, #b5179e);">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Atomic Structure</h3>
+                        <p>Understand protons, neutrons, and electrons</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 30%"></div>
+                        </div>
+                        <span>30% complete</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Grade 10 • Science</span>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="card-header" style="background: linear-gradient(135deg, #4cc9f0, #4895ef);">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>World Geography</h3>
+                        <p>Explore continents and countries</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 80%"></div>
+                        </div>
+                        <span>80% complete</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Grade 8 • Social Studies</span>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Leaderboard</h2>
+            <div class="leaderboard-list">
+                <div class="leaderboard-item">
+                    <div class="rank rank-1">1</div>
+                    <div class="leaderboard-user">
+                        <div class="avatar">RS</div>
+                        <div>Rahul Sharma</div>
+                    </div>
+                    <div class="leaderboard-score">2450 XP</div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank rank-2">2</div>
+                    <div class="leaderboard-user">
+                        <div class="avatar">PS</div>
+                        <div>Priya Singh</div>
+                    </div>
+                    <div class="leaderboard-score">2100 XP</div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank rank-3">3</div>
+                    <div class="leaderboard-user">
+                        <div class="avatar">AS</div>
+                        <div>Aarav Shah</div>
+                    </div>
+                    <div class="leaderboard-score">1950 XP</div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank">4</div>
+                    <div class="leaderboard-user">
+                        <div class="avatar">NM</div>
+                        <div>Neha Mehta</div>
+                    </div>
+                    <div class="leaderboard-score">1800 XP</div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank">5</div>
+                    <div class="leaderboard-user">
+                        <div class="avatar">VK</div>
+                        <div>Vikram Kumar</div>
+                    </div>
+                    <div class="leaderboard-score">1650 XP</div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-bullseye"></i> Daily Goals</h2>
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="goal-info">
+                        <h3>Complete 1 Lesson</h3>
+                        <p>Earn 20 XP upon completion</p>
+                    </div>
+                    <div class="goal-status completed">
+                        Completed
+                    </div>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="goal-info">
+                        <h3>Take a Quiz</h3>
+                        <p>Earn 15 XP upon completion</p>
+                    </div>
+                    <div class="goal-status completed">
+                        Completed
+                    </div>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div class="goal-info">
+                        <h3>Watch a Video</h3>
+                        <p>Earn 10 XP upon completion</p>
+                    </div>
+                    <div class="goal-status">
+                        Pending
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

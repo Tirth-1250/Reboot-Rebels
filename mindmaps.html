@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Maps - EduPlay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --danger: #ef233c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --sidebar-width: 250px;
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--warning);
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--warning);
+        }
+
+        .menu-item i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info {
+            line-height: 1.3;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .user-rank {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .logout-btn {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            padding-top: calc(var(--header-height) + 20px);
+        }
+
+        /* Header */
+        .header {
+            height: var(--header-height);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: var(--sidebar-width);
+            z-index: 100;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 8px 15px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-btn {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mind Maps Content */
+        .content-section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .section-title {
+            margin: 30px 0 20px;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .intro-text {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #4b5563;
+            max-width: 800px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mindmaps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .mindmap-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .mindmap-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mindmap-preview {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .math-bg {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        }
+
+        .science-bg {
+            background: linear-gradient(135deg, #f72585, #b5179e);
+        }
+
+        .english-bg {
+            background: linear-gradient(135deg, #4cc9f0, #4895ef);
+        }
+
+        .history-bg {
+            background: linear-gradient(135deg, #ff9e00, #ff6b00);
+        }
+
+        .geography-bg {
+            background: linear-gradient(135deg, #7209b7, #560bad);
+        }
+
+        .mindmap-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .mindmap-icon {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .mindmap-body {
+            padding: 20px;
+        }
+
+        .mindmap-body h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .mindmap-body p {
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .mindmap-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .mindmap-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Mind Map Viewer */
+        .mindmap-viewer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: none;
+            overflow: auto;
+        }
+
+        .mindmap-viewer.active {
+            display: block;
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .viewer-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Mind Map Visualization */
+        .mindmap-container {
+            min-height: 400px;
+            position: relative;
+            margin: 20px 0;
+            overflow: auto;
+        }
+
+        .mindmap {
+            position: relative;
+            padding: 40px;
+            min-width: 800px;
+        }
+
+        .node {
+            position: absolute;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+            text-align: center;
+            z-index: 2;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            z-index: 3;
+        }
+
+        .node-central {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .node-main {
+            background: var(--secondary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .node-sub {
+            background: white;
+            border: 2px solid var(--primary);
+        }
+
+        .node-detail {
+            background: var(--light);
+            font-size: 0.9rem;
+        }
+
+        .connection {
+            position: absolute;
+            background: #dee2e6;
+            transform-origin: 0 0;
+            z-index: 1;
+        }
+
+        .connection-horizontal {
+            height: 2px;
+        }
+
+        .connection-vertical {
+            width: 2px;
+        }
+
+        /* Create Mind Map Section */
+        .create-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 0;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+                width: var(--sidebar-width);
+            }
+            
+            .main-content, .header {
+                margin-left: 0;
+                left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mindmaps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                width: 200px;
+            }
+            
+            .categories {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .mindmap {
+                min-width: 600px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .viewer-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .viewer-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        /* Toggle Button */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>EduPlay</span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="curriculum.html" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Curriculum</span>
+                </a>
+                <a href="skills.html" class="menu-item">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Life Skills</span>
+                </a>
+                <a href="models.html" class="menu-item">
+                    <i class="fas fa-cube"></i>
+                    <span>3D Models</span>
+                </a>
+                <a href="quizzes.html" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Quizzes</span>
+                </a>
+                <a href="mindmaps.html" class="menu-item active">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Mind Maps</span>
+                </a>
+                <a href="games.html" class="menu-item">
+                    <i class="fas fa-dice"></i>
+                    <span>Games</span>
+                </a>
+                <a href="videos.html" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Videos</span>
+                </a>
+                <a href="competitions.html" class="menu-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Competitions</span>
+                </a>
+                <a href="leaderboard.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Leaderboard</span>
+                </a>
+                <a href="admin.html" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">RS</div>
+                    <div class="user-info">
+                        <div class="user-name">Rahul Sharma</div>
+                        <div class="user-rank">Visual Learner • Level 9</div>
+                    </div>
+                </div>
+                <a href="login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for mind maps...">
+                </div>
+                <div class="header-actions">
+                    <div class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mind Maps Content -->
+            <div class="content-section">
+                <h1 class="section-title"><i class="fas fa-project-diagram"></i> Mind Maps</h1>
+                <p class="intro-text">Visualize complex concepts and relationships with interactive mind maps. Organize information, make connections, and improve your understanding through visual learning.</p>
+                
+                <div class="categories">
+                    <div class="category-btn active">All Mind Maps</div>
+                    <div class="category-btn">Mathematics</div>
+                    <div class="category-btn">Science</div>
+                    <div class="category-btn">English</div>
+                    <div class="category-btn">History</div>
+                    <div class="category-btn">Geography</div>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-star"></i> Featured Mind Maps</h2>
+                <div class="mindmaps-grid">
+                    <div class="mindmap-card">
+                        <div class="mindmap-preview math-bg">
+                            <div class="mindmap-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="mindmap-badge">Mathematics</div>
+                        </div>
+                        <div class="mindmap-body">
+                            <h3>Algebra Concepts</h3>
+                            <p>Visual guide to algebraic expressions, equations, and functions with interconnected concepts.</p>
+                            <div class="mindmap-stats">
+                                <span><i class="fas fa-node-js"></i> 24 Nodes</span>
+                                <span><i class="fas fa-link"></i> 18 Connections</span>
+                            </div>
+                        </div>
+                        <div class="mindmap-footer">
+                            <span>Grade 9-10</span>
+                            <button class="btn btn-primary view-mindmap" data-mindmap="algebra">Explore</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mindmap-card">
+                        <div class="mindmap-preview science-bg">
+                            <div class="mindmap-icon">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <div class="mindmap-badge">Science</div>
+                        </div>
+                        <div class="mindmap-body">
+                            <h3>Cell Biology</h3>
+                            <p>Comprehensive overview of cell structure, organelles, and cellular processes.</p>
+                            <div class="mindmap-stats">
+                                <span><i class="fas fa-node-js"></i> 32 Nodes</span>
+                                <span><i class="fas fa-link"></i> 28 Connections</span>
+                            </div>
+                        </div>
+                        <div class="mindmap-footer">
+                            <span>Grade 8-9</span>
+                            <button class="btn btn-primary view-mindmap" data-mindmap="biology">Explore</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mindmap-card">
+                        <div class="mindmap-preview english-bg">
+                            <div class="mindmap-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="mindmap-badge">English</div>
+                        </div>
+                        <div class="mindmap-body">
+                            <h3>Grammar Rules</h3>
+                            <p>Visual representation of English grammar rules, tenses, and sentence structures.</p>
+                            <div class="mindmap-stats">
+                                <span><i class="fas fa-node-js"></i> 28 Nodes</span>
+                                <span><i class="fas fa-link"></i> 22 Connections</span>
+                            </div>
+                        </div>
+                        <div class="mindmap-footer">
+                            <span>All Grades</span>
+                            <button class="btn btn-primary view-mindmap" data-mindmap="grammar">Explore</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mindmap-card">
+                        <div class="mindmap-preview history-bg">
+                            <div class="mindmap-icon">
+                                <i class="fas fa-monument"></i>
+                            </div>
+                            <div class="mindmap-badge">History</div>
+                        </div>
+                        <div class="mindmap-body">
+                            <h3>World War II</h3>
+                            <p>Timeline and connections between key events, figures, and outcomes of WWII.</p>
+                            <div class="mindmap-stats">
+                                <span><i class="fas fa-node-js"></i> 36 Nodes</span>
+                                <span><i class="fas fa-link"></i> 42 Connections</span>
+                            </div>
+                        </div>
+                        <div class="mindmap-footer">
+                            <span>Grade 10-12</span>
+                            <button class="btn btn-primary view-mindmap" data-mindmap="wwii">Explore</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mindmap-card">
+                        <div class="mindmap-preview geography-bg">
+                            <div class="mindmap-icon">
+                                <i class="fas fa-globe-asia"></i>
+                            </div>
+                            <div class="mindmap-badge">Geography</div>
+                        </div>
+                        <div class="mindmap-body">
+                            <h3>Earth's Ecosystems</h3>
+                            <p>Interconnected systems of biomes, climate zones, and environmental factors.</p>
+                            <div class="mindmap-stats">
+                                <span><i class="fas fa-node-js"></i> 26 Nodes</span>
+                                <span><i class="fas fa-link"></i> 30 Connections</span>
+                            </div>
+                        </div>
+                        <div class="mindmap-footer">
+                            <span>Grade 8-10</span>
+                            <button class="btn btn-primary view-mindmap" data-mindmap="ecosystems">Explore</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mindmap-card">
+                        <div class="mindmap-preview math-bg">
+                            <div class="mindmap-icon">
+                                <i class="fas fa-shapes"></i>
+                            </div>
+                            <div class="mindmap-badge">Mathematics</div>
+                        </div>
+                        <div class="mindmap-body">
+                            <h3>Geometry Theorems</h3>
+                            <p>Visual connections between geometric principles, theorems, and formulas.</p>
+                            <div class="mindmap-stats">
+                                <span><i class="fas fa-node-js"></i> 30 Nodes</span>
+                                <span><i class="fas fa-link"></i> 35 Connections</span>
+                            </div>
+                        </div>
+                        <div class="mindmap-footer">
+                            <span>Grade 9-11</span>
+                            <button class="btn btn-primary view-mindmap" data-mindmap="geometry">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Algebra Mind Map Viewer -->
+                <div class="mindmap-viewer" id="algebra-mindmap">
+                    <div class="viewer-header">
+                        <h2 class="section-title"><i class="fas fa-calculator"></i> Algebra Concepts Mind Map</h2>
+                        <div class="viewer-actions">
+                            <button class="btn btn-outline">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                            <button class="btn btn-outline close-viewer">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mindmap-container">
+                        <div class="mindmap">
+                            <!-- Central Node -->
+                            <div class="node node-central" style="top: 50%; left: 50%;">
+                                Algebra
+                            </div>
+                            
+                            <!-- Main Nodes -->
+                            <div class="node node-main" style="top: 25%; left: 25%;">
+                                Expressions
+                            </div>
+                            <div class="node node-main" style="top: 25%; left: 50%;">
+                                Equations
+                            </div>
+                            <div class="node node-main" style="top: 25%; left: 75%;">
+                                Functions
+                            </div>
+                            <div class="node node-main" style="top: 75%; left: 25%;">
+                                Inequalities
+                            </div>
+                            <div class="node node-main" style="top: 75%; left: 50%;">
+                                Polynomials
+                            </div>
+                            <div class="node node-main" style="top: 75%; left: 75%;">
+                                Graphing
+                            </div>
+                            
+                            <!-- Sub Nodes -->
+                            <div class="node node-sub" style="top: 15%; left: 15%;">
+                                Variables
+                            </div>
+                            <div class="node node-sub" style="top: 15%; left: 35%;">
+                                Constants
+                            </div>
+                            <div class="node node-sub" style="top: 35%; left: 15%;">
+                                Terms
+                            </div>
+                            
+                            <!-- Connections will be drawn with JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create Mind Map Section -->
+                <div class="create-section">
+                    <h2 class="section-title"><i class="fas fa-plus-circle"></i> Create Your Own Mind Map</h2>
+                    <p>Design a custom mind map to organize your thoughts and study materials.</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mindmap-title">Mind Map Title</label>
+                            <input type="text" id="mindmap-title" placeholder="Enter a title for your mind map">
+                        </div>
+                        <div class="form-group">
+                            <label for="mindmap-subject">Subject</label>
+                            <select id="mindmap-subject">
+                                <option value="">Select a subject</option>
+                                <option value="math">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="english">English</option>
+                                <option value="history">History</option>
+                                <option value="geography">Geography</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mindmap-description">Description</label>
+                        <textarea id="mindmap-description" rows="3" placeholder="Describe your mind map"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="central-topic">Central Topic</label>
+                        <input type="text" id="central-topic" placeholder="Enter the central topic">
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Create Mind Map
+                    </button>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> How to Use Mind Maps</h2>
+                <div class="mindmap-card">
+                    <div class="mindmap-body">
+                        <h3>Study Effectively with Mind Maps</h3>
+                        <p>Mind maps are powerful visual tools that can help you organize information, make connections between concepts, and improve your memory retention. Here's how to make the most of them:</p>
+                        
+                        <div class="mindmap-stats">
+                            <span><i class="fas fa-lightbulb"></i> Start with a central idea</span>
+                            <span><i class="fas fa-code-branch"></i> Branch out main topics</span>
+                        </div>
+                        
+                        <div class="mindmap-stats">
+                            <span><i class="fas fa-link"></i> Connect related ideas</span>
+                            <span><i class="fas fa-palette"></i> Use colors and images</span>
+                        </div>
+                    </div>
+                    <div class="mindmap-footer">
+                        <span>Study Tips</span>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+            }
+
+            // Mobile menu toggle
+            const menuToggle = document.createElement('div');
+            menuToggle.className = 'menu-toggle';
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.appendChild(menuToggle);
+
+            menuToggle.addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.toggle('open');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                const sidebar = document.querySelector('.sidebar');
+                const isToggle = event.target.closest('.menu-toggle');
+                const isSidebar = event.target.closest('.sidebar');
+                
+                if (window.innerWidth < 992 && sidebar.classList.contains('open') && !isToggle && !isSidebar) {
+                    sidebar.classList.remove('open');
+                }
+            });
+
+            // Category buttons
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, this would filter the mind maps
+                });
+            });
+
+            // View mind map buttons
+            const viewMindmapButtons = document.querySelectorAll('.view-mindmap');
+            const mindmapViewer = document.getElementById('algebra-mindmap');
+            const closeViewer = document.querySelector('.close-viewer');
+            
+            viewMindmapButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const mindmap = this.getAttribute('data-mindmap');
+                    
+                    // Show the mind map viewer
+                    mindmapViewer.classList.add('active');
+                    
+                    // Scroll to the viewer
+                    mindmapViewer.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Draw connections (simplified version)
+                    drawMindMapConnections();
+                });
+            });
+
+            // Close viewer button
+            closeViewer.addEventListener('click', function() {
+                mindmapViewer.classList.remove('active');
+            });
+
+            // Function to draw mind map connections
+            function drawMindMapConnections() {
+                // In a real application, this would use SVG or Canvas
+                // to draw proper connections between nodes
+                console.log("Drawing mind map connections...");
+                
+                // This is a simplified representation
+                // A real implementation would calculate positions and draw lines
+                setTimeout(() => {
+                    alert("In a full implementation, this would draw interactive connections between the mind map nodes. For now, imagine the connections between the concepts!");
+                }, 300);
+            }
+
+            // Simulate loading animation for cards
+            setTimeout(() => {
+                document.querySelectorAll('.mindmap-card').forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
